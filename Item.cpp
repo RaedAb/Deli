@@ -6,7 +6,7 @@ Item::Item() : name_("n/a"), code_(0), price_(0.0)
 }
 
 // Parametized Constructor
-Item::Item(const std::string &name, int code, double price)
+Item::Item(const std::string& name, int code, double price)
     : name_(name), code_(code), price_(price)
 {
 }
@@ -22,8 +22,20 @@ Item::Item(Item &&other) noexcept
 {
 }
 
+// Copy Assignement Operator
+Item& Item::operator=(const Item &other) noexcept
+{
+    if (this != &other) {
+        name_ = other.name_;
+        code_ = other.code_;
+        price_ = other.price_;
+    }
+
+    return *this;
+}
+
 // Move Assignement Operator
-Item Item::operator=(const Item &&other) noexcept
+Item& Item::operator=(Item &&other) noexcept
 {
     if (this != &other)
     {

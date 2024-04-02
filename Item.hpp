@@ -9,16 +9,19 @@ class Item
         Item();
 
         // Parametized Constructor
-        Item(const std::string& name = "n/a", int code = 0, double price = 0.0);
+        Item(const std::string& name, int code = 0, double price = 0.0);
 
         // Copy Constructor
         Item(const Item& other);
 
         // Move Constructor
-        Item(Item &&other) noexcept;
+        Item(Item&& other) noexcept;
 
-        // Assignement Operator
-        Item operator=(const Item&& other) noexcept;
+        // Copy Assignement Operator
+        Item& operator=(const Item& other) noexcept;
+
+        // Move Assignement Operator
+        Item& operator=(Item&& other) noexcept;
 
         // Set Item name
         void setName(const std::string& name);
