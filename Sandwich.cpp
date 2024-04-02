@@ -6,7 +6,7 @@ Sandwich::Sandwich() : Item(), ingredients_{}
 }
 
 // Parametized Constructor
-Sandwich::Sandwich(const std::string &name, int code, double price, std::vector<Item *> ingredients)
+Sandwich::Sandwich(const std::string &name, int code, double price, const std::vector<Item *> &ingredients)
     : Item(name, code, price), ingredients_{ingredients}
 {
 }
@@ -54,10 +54,35 @@ bool Sandwich::addIngredient(Item *ingredient)
         ingredients_.push_back(ingredient);
     }
 
+    // Recalculate the unit price
+    setInitCost(getInitCost() + ingredient->getInitCost());
+
     return false; // ingredient is nullptr
 }
 
+// Remove an ingredient
+bool Sandwich::removeIngredient(Item *ingredient)
+{
+    auto it = std::find(ingredients_.begin(), ingredients_.end(), ingredient);
+    if (it != ingredients_.end())
+    {
+        ingredients_.erase(it);
+        // Recalculate the unit price
+        setInitCost(getInitCost() - ingredient->getInitCost());
+
+        return true;
+    }
+    return false; // Ingredient could not found
+}
+
 // Get vector of ingredients
-std::vector<Item *> Sandwich::getIngredients() const {
+std::vector<Item *> Sandwich::getIngredients() const
+{
     return ingredients_;
+}
+
+// Override getProfit method
+double Sandwich::getProfit() const
+{
+    return getPrice() - getInitCost();
 }

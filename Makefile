@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
-SRCS = Item.cpp main.cpp
+SRCS = Item.cpp Sandwich.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
 EXEC = main
 

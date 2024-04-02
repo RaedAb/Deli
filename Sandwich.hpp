@@ -10,7 +10,7 @@ class Sandwich : public Item
         Sandwich();
 
         // Parametized Constructor
-        Sandwich(const std::string &name, int code = 0, double price = 0.0, std::vector<Item *> ingredients = {});
+        Sandwich(const std::string& name, int code = 0, double price = 0.0, const std::vector<Item *>& ingredients = {});
 
         // Copy Constructor
         Sandwich(const Sandwich &other);
@@ -27,8 +27,14 @@ class Sandwich : public Item
         // Add an ingredient
         bool addIngredient(Item *ingredient);
 
+        // Remove an ingredient
+        bool removeIngredient(Item *ingredient);
+
         // Get vector of ingredients
         std::vector<Item *> getIngredients() const;
+
+        // Override getProfit method
+        double getProfit() const override;
 
     private:
         std::vector<Item *> ingredients_;
