@@ -9,7 +9,7 @@ class Item
         Item();
 
         // Parametized Constructor
-        Item(const std::string &name, int code = 0, double price = 0.0, double init_cost = 0.0);
+        Item(const std::string &name, int quantity = 0, int code = 0, double price = 0.0, double init_cost = 0.0);
 
         // Copy Constructor
         Item(const Item& other);
@@ -28,6 +28,12 @@ class Item
 
         // Get Item Name
         std::string getName() const;
+
+        // Set item quantity
+        void setQuantity(int quantity);
+
+        // Get item Quantity
+        int getQuantity() const;
 
         // Set Item Barcode
         void setCode(int code);
@@ -52,6 +58,7 @@ class Item
 
     private:
         std::string name_;
+        int quantity_;
         int code_;
         double price_;
         double init_cost_;
