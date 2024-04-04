@@ -36,3 +36,19 @@ Inventory &Inventory::operator=(Inventory &&other) noexcept
     }
     return *this;
 }
+
+// Add an Item to the inventory
+void Inventory::addItem(Item *item)
+{
+    // Check if item exists
+    auto it = items_.find(item->getCode());
+    if (it != items_.end())
+    {
+        // Update quantity
+        it->second->setQuantity(it->second->getQuantity() + item->getQuantity());
+    }
+    else
+    {
+        items_[item->getCode()] = item;
+    }
+}

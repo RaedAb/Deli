@@ -22,10 +22,15 @@ class Inventory
         // Move Assignement Operator
         Inventory &operator=(Inventory &&other) noexcept;
 
+        // Add an Item to the inventory
+        void addItem(Item* item);
+
+        // Display Items function
+
     private:
         std::unordered_map<int, Item *> items_;
         int size_;
-        
+
 };
 
 #endif
