@@ -12,19 +12,19 @@ class Item
         Item(const std::string &name, int quantity = 0, int code = 0, double price = 0.0, double init_cost = 0.0);
 
         // Copy Constructor
-        Item(const Item& other);
+        Item(const Item &other);
 
         // Move Constructor
-        Item(Item&& other) noexcept;
+        Item(Item &&other) noexcept;
 
         // Copy Assignement Operator
-        Item& operator=(const Item& other) noexcept;
+        Item &operator=(const Item &other) noexcept;
 
         // Move Assignement Operator
-        Item& operator=(Item&& other) noexcept;
+        Item &operator=(Item &&other) noexcept;
 
         // Set Item name
-        void setName(const std::string& name);
+        void setName(const std::string &name);
 
         // Get Item Name
         std::string getName() const;
