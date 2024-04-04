@@ -1,4 +1,4 @@
-#include "Inventory.hpp"
+#include "../include/Inventory.hpp"
 
 // Constructor
 Inventory::Inventory() : items_({}), size_(0)

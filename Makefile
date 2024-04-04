@@ -1,8 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
-SRCS = Item.cpp Sandwich.cpp main.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRCDIR = src
+OBJDIR = obj
+
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+OBJS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+
 EXEC = main
 
 .PHONY: all clean
@@ -10,10 +14,13 @@ EXEC = main
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-%.o: %.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean:
 	rm -f $(OBJS) $(EXEC)

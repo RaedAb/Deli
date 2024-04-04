@@ -1,4 +1,4 @@
-#include "Item.hpp"
+#include "../include/Item.hpp"
 
 // Constructor
 Item::Item() : name_("n/a"), code_(0), price_(0.0)
