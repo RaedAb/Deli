@@ -4,13 +4,11 @@
 #include <map>
 #include "Item.hpp"
 
-class Inventory {
+class Inventory
+{
     public:
         // Constructor
         Inventory();
-
-        // Parametized Constructor
-        // Inventory(const std::string &name, int code = 0, double price = 0.0);
 
         // Copy Constructor
         Inventory(const Inventory &other);
@@ -25,8 +23,9 @@ class Inventory {
         Inventory &operator=(Inventory &&other) noexcept;
 
     private:
-        std::unordered_map<int, Item*> items_;
+        std::unordered_map<int, Item *> items_;
         int size_;
+        
 };
 
-#endif 
+#endif
