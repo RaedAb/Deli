@@ -22,13 +22,21 @@ class Inventory
         // Move Assignement Operator
         Inventory &operator=(Inventory &&other) noexcept;
 
+        // Scan CSV for products with matching barcode
+        Item* queryDatabase(const std::string& barcode);
+
         // Add an Item to the inventory
         void addItem(Item* item);
 
-        // Display Items function
+        // Remove an Item from the inventory
+        void removeItem(Item* item);
+
+        // Get Inventory size
+        int getSize() const;
 
     private:
         std::unordered_map<int, Item *> items_;
+        double value_;
         int size_;
 
 };
