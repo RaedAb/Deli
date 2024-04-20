@@ -7,7 +7,7 @@ Sandwich::Sandwich() : Item(), ingredients_{}
 
 // Parametized Constructor
 Sandwich::Sandwich(const std::string &name, int code, double price, const std::vector<Item *> &ingredients)
-    : Item(name, code, price), ingredients_{ingredients}
+    : Item(name, 1, code, price), ingredients_{ingredients}
 {
 }
 
