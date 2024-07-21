@@ -2,6 +2,7 @@
 #define SANDWICH_HPP_
 
 #include "Item.hpp"
+#include <vector>
 
 class Sandwich : public Item
 {
