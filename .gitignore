@@ -7,5 +7,6 @@
 
 .vscode/
 obj/
+main
 branded_food.csv
 .DS_Store
