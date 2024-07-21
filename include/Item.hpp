@@ -5,64 +5,170 @@
 
 class Item
 {
-    public:
-        // Constructor
-        Item();
+public:
+    /**
+     * @brief Default Constructor
+     *
+     * Constructs an Item with name: "n/a", # = 0, code = 0, price = 0.0, p_price = 0
+     */
+    Item();
 
-        // Parametized Constructor
-        Item(const std::string &name, int quantity = 0, int code = 0, double price = 0.0, double init_cost = 0.0);
+    /**
+     * @brief Parameterized Constructor
+     *
+     * Constructs an Item object with the specified values.
+     *
+     * @param name The name of the item.
+     * @param quantity The quantity of the item.
+     * @param code The unique code of the item.
+     * @param price The selling price of the item.
+     * @param init_cost The initial cost price of the item.
+     */
+    Item(const std::string &name, int quantity = 0, int code = 0, double price = 0.0, double init_cost = 0.0);
 
-        // Copy Constructor
-        Item(const Item &other);
+    /**
+     * @brief Copy Constructor
+     *
+     * Constructs an Item object as a copy of another Item object.
+     *
+     * @param other The Item object to copy from.
+     */
+    Item(const Item &other);
 
-        // Move Constructor
-        Item(Item &&other) noexcept;
+    /**
+     * @brief Move Constructor
+     *
+     * Constructs an Item object by transferring resources from another Item object.
+     *
+     * @param other The Item object to move from.
+     */
+    Item(Item &&other) noexcept;
 
-        // Copy Assignement Operator
-        Item &operator=(const Item &other) noexcept;
+    /**
+     * @brief Copy Assignment Operator
+     *
+     * Assigns the state of one Item object to another Item object.
+     *
+     * @param other The Item object to copy from.
+     * @return Reference to this Item object.
+     */
+    Item &operator=(const Item &other) noexcept;
 
-        // Move Assignement Operator
-        Item &operator=(Item &&other) noexcept;
+    /**
+     * @brief Move Assignment Operator
+     *
+     * Moves the state from one Item object to another Item object.
+     *
+     * @param other The Item object to move from.
+     * @return Reference to this Item object.
+     */
+    Item &operator=(Item &&other) noexcept;
 
-        // Set Item name
-        void setName(const std::string &name);
+    /**
+     * @brief Set Item Name
+     *
+     * Sets the name of the item.
+     *
+     * @param name The new name of the item.
+     */
+    void setName(const std::string &name);
 
-        // Get Item Name
-        std::string getName() const;
+    /**
+     * @brief Get Item Name
+     *
+     * Retrieves the name of the item.
+     *
+     * @return The name of the item.
+     */
+    std::string getName() const;
 
-        // Set item quantity
-        void setQuantity(int quantity);
+    /**
+     * @brief Set Item Quantity
+     *
+     * Sets the quantity of the item.
+     *
+     * @param quantity The new quantity of the item.
+     */
+    void setQuantity(int quantity);
 
-        // Get item Quantity
-        int getQuantity() const;
+    /**
+     * @brief Get Item Quantity
+     *
+     * Retrieves the quantity of the item.
+     *
+     * @return The quantity of the item.
+     */
+    int getQuantity() const;
 
-        // Set Item Barcode
-        void setCode(int code);
+    /**
+     * @brief Set Item Code
+     *
+     * Sets the unique code of the item.
+     *
+     * @param code The new unique code of the item.
+     */
+    void setCode(int code);
 
-        // Get Item Barcode
-        int getCode() const;
+    /**
+     * @brief Get Item Code
+     *
+     * Retrieves the unique code of the item.
+     *
+     * @return The unique code of the item.
+     */
+    int getCode() const;
 
-        // Set Item Price
-        void setPrice(double price);
+    /**
+     * @brief Set Item Price
+     *
+     * Sets the selling price of the item.
+     *
+     * @param price The new selling price of the item.
+     */
+    void setPrice(double price);
 
-        // Get an Item price
-        double getPrice() const;
+    /**
+     * @brief Get Item Price
+     *
+     * Retrieves the selling price of the item.
+     *
+     * @return The selling price of the item.
+     */
+    double getPrice() const;
 
-        // Set Purchase Price
-        void setInitCost(double init_cost);
+    /**
+     * @brief Set Purchase Price
+     *
+     * Sets the initial cost price of the item.
+     *
+     * @param init_cost The new initial cost price of the item.
+     */
+    void setInitCost(double init_cost);
 
-        // Get Purchase Price
-        double getInitCost() const;
+    /**
+     * @brief Get Purchase Price
+     *
+     * Retrieves the initial cost price of the item.
+     *
+     * @return The initial cost price of the item.
+     */
+    double getInitCost() const;
 
-        // Items profit
-        virtual double getProfit() const;
+    /**
+     * @brief Calculate Item Profit
+     *
+     * Computes the profit made on the item by subtracting the initial cost from the selling price.
+     *
+     * @return The profit made on the item.
+     */
+    double getProfit() const;
 
-    private:
-        std::string name_;
-        int quantity_;
-        int code_;
-        double price_;
-        double init_cost_;
+private:
+    std::string name_; ///< Name of the item
+    int quantity_;     ///< Quantity of the item
+    int code_;         ///< Unique code of the item
+    double price_;     ///< Selling price of the item
+    double init_cost_; ///< Initial cost price of the item
 };
 
-#endif
+#endif // ITEM_HPP_
