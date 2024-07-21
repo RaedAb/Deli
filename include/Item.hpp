@@ -1,5 +1,6 @@
 #ifndef ITEM_HPP_
 #define ITEM_HPP_
+
 #include <string>
 
 class Item
@@ -53,7 +54,7 @@ class Item
         // Get Purchase Price
         double getInitCost() const;
 
-        // Profit of an item
+        // Items profit
         virtual double getProfit() const;
 
     private:
