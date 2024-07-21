@@ -40,7 +40,7 @@ Inventory &Inventory::operator=(Inventory &&other) noexcept
 }
 
 // Add an Item to the inventory
-void Inventory::addItem(Item* item)
+void Inventory::addItem(std::shared_ptr<Item> item)
 {
     
     // Check if item exists
@@ -61,7 +61,7 @@ void Inventory::addItem(Item* item)
 }
 
 // Remove an Item from the inventory
-void Inventory::removeItem(Item* item)
+void Inventory::removeItem(std::shared_ptr<Item> item)
 {
     auto it = items_.find(item->getCode());
     if (it != items_.end())
@@ -70,7 +70,8 @@ void Inventory::removeItem(Item* item)
         {
             it->second->setQuantity(it->second->getQuantity() - 1);
         }
-        items_.erase(item->getCode());
+    } else {
+        // throw exeption item does not exist
     }
 
     // Update size and value

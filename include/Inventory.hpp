@@ -6,39 +6,38 @@
 
 class Inventory
 {
-    public:
-        // Constructor
-        Inventory();
+public:
+    // Constructor
+    Inventory();
 
-        // Copy Constructor
-        Inventory(const Inventory &other);
+    // Copy Constructor
+    Inventory(const Inventory &other);
 
-        // Move Constructor
-        Inventory(Inventory &&other) noexcept;
+    // Move Constructor
+    Inventory(Inventory &&other) noexcept;
 
-        // Copy Assignement Operator
-        Inventory &operator=(const Inventory &other) noexcept;
+    // Copy Assignement Operator
+    Inventory &operator=(const Inventory &other) noexcept;
 
-        // Move Assignement Operator
-        Inventory &operator=(Inventory &&other) noexcept;
+    // Move Assignement Operator
+    Inventory &operator=(Inventory &&other) noexcept;
 
-        // Scan CSV for products with matching barcode
-        Item* queryDatabase(const std::string& barcode);
+    // Scan CSV for products with matching barcode
+    std::shared_ptr<Item> queryDatabase(const std::string &barcode);
 
-        // Add an Item to the inventory
-        void addItem(Item* item);
+    // Add an Item to the inventory
+    void Inventory::addItem(std::shared_ptr<Item> item);
 
-        // Remove an Item from the inventory
-        void removeItem(Item* item);
+    // Remove an Item from the inventory
+    void removeItem(std::shared_ptr<Item> item);
 
-        // Get Inventory size
-        int getSize() const;
+    // Get Inventory size
+    int getSize() const;
 
-    private:
-        std::unordered_map<int, Item *> items_;
-        double value_;
-        int size_;
-
+private:
+    std::unordered_map<int, std::shared_ptr<Item>> items_;
+    double value_;
+    int size_;
 };
 
 #endif
