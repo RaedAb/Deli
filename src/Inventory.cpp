@@ -39,48 +39,105 @@ Inventory &Inventory::operator=(Inventory &&other) noexcept
     return *this;
 }
 
-// Add an Item to the inventory
-void Inventory::addItem(std::shared_ptr<Item> item)
+// Scan CSV for products with matching barcode
+std::shared_ptr<Item> Inventory::queryDatabase(const std::string &barcode)
 {
-    
-    // Check if item exists
-    auto it = items_.find(item->getCode());
+    return nullptr;
+}
+
+// Add an Item to the inventory
+void Inventory::addItem(const Item &item)
+{
+    // Create or find the shared_ptr
+    auto it = items_.find(item.getCode());
     if (it != items_.end())
     {
         // Update quantity
-        it->second->setQuantity(it->second->getQuantity() + item->getQuantity());
+        it->second->setQuantity(it->second->getQuantity() + item.getQuantity());
     }
     else
     {
-        items_[item->getCode()] = item;
+        // Add pointer to item
+        items_[item.getCode()] = std::make_shared<Item>(item);
     }
 
-    //Update size and value
-    size_ += item->getQuantity();
-    value_ += item->getPrice() * item->getQuantity();
+    // Update size and value
+    size_ += item.getQuantity();
+    value_ += item.getPrice() * item.getQuantity();
 }
 
 // Remove an Item from the inventory
-void Inventory::removeItem(std::shared_ptr<Item> item)
+void Inventory::removeItem(const Item &item)
 {
-    auto it = items_.find(item->getCode());
+    auto it = items_.find(item.getCode());
     if (it != items_.end())
     {
         if (it->second->getQuantity() > 1)
         {
-            it->second->setQuantity(it->second->getQuantity() - 1);
+            it->second->setQuantity(it->second->getQuantity() - item.getQuantity());
         }
-    } else {
-        // throw exeption item does not exist
+    }
+    else
+    {
+        // Item does not exist
     }
 
     // Update size and value
-    size_ --;
-    value_ -= item->getPrice();
+    size_ -= item.getQuantity();
+    value_ -= item.getPrice() * item.getQuantity();
+}
+
+/**
+ * Set items map
+ * @param items a refrence to an items map
+ */
+void Inventory::setItems(const std::unordered_map<int, std::shared_ptr<Item>> &items)
+{
+    items_ = items;
+    
+    // Update size and value
+    size_ = items_.size();
+    value_ = 0;
+    for (const auto &[barcode, item] : items_)
+    {
+        if (item)
+        {
+            value_ += item->getPrice();
+        }
+    }
+}
+
+/**
+ * @return refrence to items map
+ */
+const std::unordered_map<int, std::shared_ptr<Item>> &Inventory::getItems() const
+{
+    return items_;
+}
+
+/**
+ * Get item by barcode
+ * 
+ * @return Pointer to Item Object
+ */
+std::shared_ptr<Item> Inventory::getItem(const int barcode) const
+{
+    auto it = items_.find(barcode);
+    if (it != items_.end())
+    {
+        return it->second;
+    }
+    return nullptr;
 }
 
 // Get Inventory size
 int Inventory::getSize() const
 {
     return size_;
+}
+
+// Get total value
+int Inventory::getValue() const
+{
+    return value_;
 }
