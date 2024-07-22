@@ -8,5 +8,6 @@
 .vscode/
 obj/
 main
+data
 branded_food.csv
 .DS_Store
