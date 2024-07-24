@@ -7,7 +7,8 @@
 
 .vscode/
 obj/
-main
+app
+test
 data
 branded_food.csv
 .DS_Store
