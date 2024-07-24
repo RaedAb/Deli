@@ -53,8 +53,8 @@ std::string Database::itemToCSV(const std::shared_ptr<Item> item) const
 {
     if (item)
     {
-        return item->getName() + "," + std::to_string(item->getCode()) + "," + std::to_string(item->getQuantity()) + "," + std::to_string(item->getPrice());
-        +"," + std::to_string(item->getInitCost());
+        return item->getName() + "," + std::to_string(item->getCode()) + "," + std::to_string(item->getQuantity()) + ","
+            + std::to_string(item->getPrice()) + "," + std::to_string(item->getInitCost());
     }
 
     return "";
@@ -124,7 +124,7 @@ bool Database::saveToCSV(const Inventory &inventory, const std::string &filename
         for (const auto &pair : items)
         {
             if (pair.second)
-                file << itemToCSV(pair.second);
+                file << itemToCSV(pair.second) << "\n";
         }
 
         file.close();
