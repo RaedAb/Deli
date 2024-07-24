@@ -1,26 +1,36 @@
+# Compiler
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra
+CXXFLAGS = -std=c++17 -Wall
 
-SRCDIR = src
-OBJDIR = obj
+# Directories
+SRC_DIR = src
+OBJ_DIR = obj
+TEST_DIR = tests
 
-SRCS = $(wildcard $(SRCDIR)/*.cpp)
-OBJS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+# Files
+MAIN = $(SRC_DIR)/main.cpp
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+OBJ_FILES_NO_MAIN = $(filter-out $(OBJ_DIR)/main.o, $(OBJ_FILES))
 
-EXEC = main
+# Test files
+TEST_FILE = $(TEST_DIR)/test.cpp
 
-.PHONY: all clean
+# Targets
+app: $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o app $(OBJ_FILES)
 
-all: $(EXEC)
+test: $(OBJ_FILES_NO_MAIN) $(TEST_FILE)
+	$(CXX) $(CXXFLAGS) -o test $(OBJ_FILES_NO_MAIN) $(TEST_FILE)
 
-$(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+# Rule for compiling object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
-
+# Clean up build files
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f $(OBJ_DIR)/*.o app test
+	rm -rf $(OBJ_DIR)
+
+.PHONY: app test clean
