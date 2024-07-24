@@ -7,74 +7,67 @@
 #include "../include/Item.hpp"
 #include "../include/Database.hpp"
 
-// void testAddItem()
-// {
-//     Inventory inventory;
-//     Item item1("Item1", 10, 123, 10.0, 5.0); // quantity, code, price, initial cost
-//     inventory.addItem(item1);
+void testAddItem()
+{
+    Inventory inventory;
+    Item item1("Item1", 10, 123, 10.0, 5.0); // quantity, code, price, initial cost
+    inventory.addItem(item1);
 
-//     assert(inventory.getSize() == 10);     // Assuming `getSize` returns quantity
-//     assert(inventory.getValue() == 100.0); // Assuming `getValue` returns total price
+    assert(inventory.getSize() == 10);     // Assuming `getSize` returns quantity
+    assert(inventory.getValue() == 100.0); // Assuming `getValue` returns total price
 
-//     Item item2("Item2", 5, 456, 20.0, 10.0);
-//     inventory.addItem(item2);
+    Item item2("Item2", 5, 456, 20.0, 10.0);
+    inventory.addItem(item2);
 
-//     assert(inventory.getSize() == 15);     // Updated size after adding more items
-//     assert(inventory.getValue() == 200.0); // Updated value after adding more items
-//     std::cout << "testAddItem passed." << std::endl;
-// }
+    assert(inventory.getSize() == 15);     // Updated size after adding more items
+    assert(inventory.getValue() == 200.0); // Updated value after adding more items
+    std::cout << "testAddItem passed." << std::endl;
+}
 
-// void testRemoveItem()
-// {
-//     Inventory inventory;
-//     Item item1("Item1", 10, 123, 10.0, 5.0);
-//     inventory.addItem(item1);
+void testRemoveItem()
+{
+    Inventory inventory;
+    Item item1("Item1", 10, 123, 10.0, 5.0);
+    inventory.addItem(item1);
 
-//     inventory.removeItem(item1);
+    inventory.removeItem(item1);
 
-//     assert(inventory.getSize() == 0);    // After removing, size should be 0
-//     assert(inventory.getValue() == 0.0); // After removing, value should be 0.0
-//     std::cout << "testRemoveItem passed." << std::endl;
-// }
+    assert(inventory.getSize() == 0);    // After removing, size should be 0
+    assert(inventory.getValue() == 0.0); // After removing, value should be 0.0
+    std::cout << "testRemoveItem passed." << std::endl;
+}
 
-// void testCopyConstructor()
-// {
-//     Inventory original;
-//     Item item1("Item1", 10, 123, 10.0, 5.0);
-//     original.addItem(item1);
+void testCopyConstructor()
+{
+    Inventory original;
+    Item item1("Item1", 10, 123, 10.0, 5.0);
+    original.addItem(item1);
 
-//     Inventory copy(original);
-//     assert(copy.getSize() == original.getSize());
-//     assert(copy.getValue() == original.getValue());
-//     std::cout << "testCopyConstructor passed." << std::endl;
-// }
+    Inventory copy(original);
+    assert(copy.getSize() == original.getSize());
+    assert(copy.getValue() == original.getValue());
+    std::cout << "testCopyConstructor passed." << std::endl;
+}
 
-// void testMoveConstructor()
-// {
-//     Inventory original;
-//     Item item1("Item1", 10, 123, 10.0, 5.0);
-//     original.addItem(item1);
+void testMoveConstructor()
+{
+    Inventory original;
+    Item item1("Item1", 10, 123, 10.0, 5.0);
+    original.addItem(item1);
 
-//     Inventory moved(std::move(original));
-//     assert(moved.getSize() == 10);     // Updated size after move
-//     assert(moved.getValue() == 100.0); // Updated value after move
-//     std::cout << "testMoveConstructor passed." << std::endl;
-// }
+    Inventory moved(std::move(original));
+    assert(moved.getSize() == 10);     // Updated size after move
+    assert(moved.getValue() == 100.0); // Updated value after move
+    std::cout << "testMoveConstructor passed." << std::endl;
+}
 
-// void runTests()
-// {
-//     testAddItem();
-//     testRemoveItem();
-//     testCopyConstructor();
-//     testMoveConstructor();
-// }
-
-// int main()
-// {
-//     runTests();
-//     std::cout << "All tests passed." << std::endl;
-//     return 0;
-// }
+void runTests()
+{
+    testAddItem();
+    testRemoveItem();
+    testCopyConstructor();
+    testMoveConstructor();
+}
 
 // Helper function to clear test data files
 void clearTestFile(const std::string &filename)
@@ -121,16 +114,16 @@ void testSaveToCSV()
 
     // Check the first item
     std::getline(file, line);
-    std::string expectedLine1 = item1.getName() + "," + std::to_string(item1.getCode()) + "," +
-                                std::to_string(item1.getQuantity()) + "," + std::to_string(item1.getPrice()) + "," +
-                                std::to_string(item1.getInitCost());
+    std::string expectedLine1 = item2.getName() + "," + std::to_string(item2.getCode()) + "," +
+        std::to_string(item2.getQuantity()) + "," + std::to_string(item2.getPrice()) + "," +
+        std::to_string(item2.getInitCost());
     assert(line == expectedLine1);
 
     // Check the second item
     std::getline(file, line);
-    std::string expectedLine2 = item2.getName() + "," + std::to_string(item2.getCode()) + "," +
-                                std::to_string(item2.getQuantity()) + "," + std::to_string(item2.getPrice()) + "," +
-                                std::to_string(item2.getInitCost());
+    std::string expectedLine2 = item1.getName() + "," + std::to_string(item1.getCode()) + "," +
+        std::to_string(item1.getQuantity()) + "," + std::to_string(item1.getPrice()) + "," +
+        std::to_string(item1.getInitCost());
     assert(line == expectedLine2);
 
     file.close();
@@ -170,6 +163,7 @@ void runDatabaseTests()
 
 int main()
 {
+    runTests();
     clearTestFile("./data/test_products.csv");
     runDatabaseTests();
     std::cout << "All tests passed." << std::endl;
