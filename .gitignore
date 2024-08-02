@@ -10,5 +10,6 @@ obj/
 app
 test
 data
+receipts
 branded_food.csv
 .DS_Store
